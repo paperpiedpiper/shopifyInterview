@@ -1,0 +1,29 @@
+<div class="collection-tabbed section-wrapper">
+  <section class="containwith-image common-space">
+    <div class="section-header text-center">
+      <div class="section-subtitle">{{section.settings.subtitle}}</div>
+      <h2 class="section-title">{{section.settings.title}}</h2>
+    </div>
+    <div class="tabbed-header">
+      <div class="tabbed-title">{{section.settings.tab_title}}</div>
+      <ul class="tabbed-menu">
+        {% for block in section.blocks %}
+        <li {% if forloop.first == true %}class="active"{% endif %}>
+          <a href="#tabbed-{{block.settings.title | handle }}">{{block.settings.title}}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="tabbed-body">
+      {% for block in section.blocks %}
+      <div class="products-carousel owl-carousel owl-carousel-slider-hdd" id="tabbed-{{block.settings.title | handle }}" {% if forloop.first == false %}style="display:none"{% endif %}>
+        {% for product in collections[block.settings.collection].products limit: 9 %}
+        
+        {% include "collection-product-grid-new" %}
+        
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</div>

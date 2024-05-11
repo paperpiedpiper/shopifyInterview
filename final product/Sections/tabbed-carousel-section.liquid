@@ -1,0 +1,63 @@
+{% include 'tabbed-carousel-section' %}
+{% if section.settings.show_previously_viewed %}
+  <script src="{{ 'previously-viewed.js' | asset_url  }}" defer> </script>
+{% endif %}
+
+{% schema %}
+ {
+   "name": "Tabbed section",
+   "settings": [
+	{
+		"type": "text",
+		"id"  : "title",
+		"label": "Title"
+	},
+	{
+		"type": "text",
+		"id"  : "subtitle",
+		"label": "Subtitle"
+	},
+	{
+		"type": "text",
+		"id"  : "tab_title",
+		"label": "Section Title"
+	},
+     {
+		"type": "checkbox",
+		"id"  : "show_previously_viewed",
+		"label": "Dynamically change to Previously Viewed after 4 items",
+         "default": true
+	}
+],
+"blocks": [
+	{
+		"type": "tab",
+		"name": "Collection",
+		"settings":[
+			{
+				"type": "text",
+                   "id"  : "title",
+                   "label": "Title"
+			},
+			{
+				"type": "collection",
+                   "id"  : "collection",
+                   "label": "Collection"
+			}
+		]
+	}
+],
+    "presets":[
+       {
+          "name":"Tabbed collection",
+          "category":"collection"
+       }
+    ]
+ }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

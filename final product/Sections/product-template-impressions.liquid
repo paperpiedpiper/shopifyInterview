@@ -1,0 +1,33 @@
+{% comment %} To be inserted in the general product section .liquid file of your theme {% endcomment %}
+
+{% if product %}
+  <script>
+  const maxSize = 4;
+  const previouslyViewed = JSON.parse(localStorage.getItem('prvViewed')) || [];
+
+  const arrangeProduct = (productData) => {
+    const foundProduct = previouslyViewed.find((product) => product.id === productData.id);
+    const foundProductIndex = foundProduct ? previouslyViewed.indexOf(foundProduct) : false;
+    
+    if (!foundProduct) {
+      previouslyViewed.unshift(productData);
+      if (previouslyViewed.length > maxSize) previouslyViewed.pop();
+    } else {
+      if (foundProductIndex === 0) return;
+      previouslyViewed.splice(foundProductIndex, 1);
+      previouslyViewed.unshift(foundProduct);
+    }
+  
+    localStorage.setItem('prvViewed', JSON.stringify(previouslyViewed));
+  }
+
+  fetch(window.Shopify.routes.root + 'products/{{ product.handle }}.js')
+  .then(response => response.json())
+  .then((data) => { 
+      arrangeProduct(data)
+    })
+  .catch((e) => {
+    console.warn(`Failed to fetch and store product data \n Reason: ${e}`)
+  })
+</script>
+{% endif %}
