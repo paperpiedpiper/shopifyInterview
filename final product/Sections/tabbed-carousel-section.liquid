@@ -1,4 +1,7 @@
-{% include 'tabbed-carousel-section' %}
+{% comment %} Changes: {% endcomment %}
+{% comment %} - added a checkbox section setting to enable the dynamic change to last-4 items view - {% endcomment %}
+
+{% include 'tabbed-carousel' %}
 {% if section.settings.show_previously_viewed %}
   <script src="{{ 'previously-viewed.js' | asset_url  }}" defer> </script>
 {% endif %}

@@ -1,3 +1,7 @@
+// Logic to check if there are products to display instead of the bestsellers collection
+//
+// if yes, it replaces the section title list and the body, containing the featured products
+
 document.addEventListener("DOMContentLoaded", function () {
     const previouslyViewedData = JSON.parse(localStorage.getItem("prvViewed"));
     const previouslyViewedDataSize = previouslyViewedData ? previouslyViewedData.length : 0;
@@ -15,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     async function getProductCardHTML(productHandle) {
       try {
         const response = await fetch( `/products/${productHandle}?section_id=collection-product-grid-test` );
-        if (!response.ok) {
+        if ( !response.ok ) {
           throw new Error(`Failed to fetch the product. Reason: ${response.status}`);
         }
         const responseText = await response.text();
